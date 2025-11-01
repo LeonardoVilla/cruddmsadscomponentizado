@@ -6,8 +6,48 @@ use Livewire\Component;
 
 class Alunos extends Component
 {
+    public $nome;
+    public $email;
+    public $telefone;
+    public $nascimento;
+    public $curso;
+
+
     public function render()
     {
         return view('livewire.alunos')->layout('layouts.app');
     }
+    
+    public function store(){
+    
+        $this->validate([
+            'nome' => 'required|min:3',
+            'email' => 'required|email|unique:alunos,email',
+            'telefone' => 'nullable|string',
+            'nascimento' => 'nullable|date',
+            'curso' => 'required|string',
+        ]);
+
+        Aluno::create([
+            'nome' => $this->nome,
+            'email' => $this->email,
+            'telefone' => $this->telefone,
+            'nascimento' => $this->nascimento,
+            'curso' => $this->curso,
+        ]);
+
+        $this->reset(['nome', 'email', 'telefone', 'nascimento', 'curso']);
+
+        session()->flash('success', 'Aluno cadastrado com sucesso!');
+
+    }
+
+    public function update(){
+
+    }
+
+    public function delete(){
+
+    }
+
 }

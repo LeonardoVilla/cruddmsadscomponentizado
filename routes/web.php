@@ -3,12 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Home;
 use App\Livewire\Alunos;
+use App\Livewire\Sala;
 
 // Route::view('/', 'welcome');
 
 Route::get('/', Home::class)->name('home');
 
 Route::get('alunos', Alunos::class)->name('alunos');
+
+Route::get('sala', Sala::class)->name('sala');
+
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
