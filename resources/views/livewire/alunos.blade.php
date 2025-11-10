@@ -1,4 +1,4 @@
-
+<x-app-layout>
     <div class="max-w-3xl mx-auto mt-10 bg-white shadow-md rounded-2xl p-8">
         <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">Cadastro de Aluno</h2>
 
@@ -76,3 +76,4 @@
             </div>
         @endif
     </div>
+</x-app-layout>

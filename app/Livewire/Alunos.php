@@ -19,7 +19,7 @@ class Alunos extends Component
 
     public function render()
     {
-        return view('livewire.alunos')->layout('layouts.app');
+        return view('livewire.alunos');
     }
 
     protected $rules = [
