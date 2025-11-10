@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Aluno;
+use Livewire\Component;
 
 class Alunos extends Component
 {
@@ -22,16 +22,18 @@ class Alunos extends Component
         return view('livewire.alunos')->layout('layouts.app');
     }
 
+    protected $rules = [
+        'nome' => 'required|min:3',
+        'email' => 'required|email|unique:aluno,email',
+        'telefone' => 'nullable|string',
+        'nascimento' => 'nullable|date',
+        'curso' => 'required|string',
+    ];
+
     public function store()
     {
 
-        $this->validate([
-            'nome' => 'required|min:3',
-            'email' => 'required|email|unique:aluno,email',
-            'telefone' => 'nullable|string',
-            'nascimento' => 'nullable|date',
-            'curso' => 'required|string',
-        ]);
+        $this->validate();
 
         Aluno::create([
             'nome' => $this->nome,
