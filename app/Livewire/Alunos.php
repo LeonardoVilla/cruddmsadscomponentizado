@@ -7,19 +7,23 @@ use Livewire\Component;
 class Alunos extends Component
 {
     public $nome;
-    public $email;
-    public $telefone;
-    public $nascimento;
-    public $curso;
 
+    public $email;
+
+    public $telefone;
+
+    public $nascimento;
+
+    public $curso;
 
     public function render()
     {
         return view('livewire.alunos')->layout('layouts.app');
     }
-    
-    public function store(){
-    
+
+    public function store()
+    {
+
         $this->validate([
             'nome' => 'required|min:3',
             'email' => 'required|email|unique:alunos,email',
@@ -40,14 +44,12 @@ class Alunos extends Component
 
         session()->flash('success', 'Aluno cadastrado com sucesso!');
 
-    }
-
-    public function update(){
-
-    }
-
-    public function delete(){
+        // Redireciona de volta para a mesma rota
+        return redirect(request()->header('Referer'));
 
     }
 
+    public function update() {}
+
+    public function delete() {}
 }
