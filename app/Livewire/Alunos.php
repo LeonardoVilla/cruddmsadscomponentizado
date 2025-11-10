@@ -25,7 +25,7 @@ class Alunos extends Component
     protected $rules = [
         'nome' => 'required|min:3',
         'email' => 'required|email|unique:aluno,email',
-        'telefone' => ['nullable', 'string', 'unique:alunos,telefone'],
+        'telefone' => 'required|string|unique:alunos,telefone',
         'telefone' => 'nullable|string',
         'nascimento' => 'nullable|date',
         'curso' => 'required|string',
