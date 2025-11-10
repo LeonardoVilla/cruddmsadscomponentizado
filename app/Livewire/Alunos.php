@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Aluno;
 
 class Alunos extends Component
 {
@@ -26,7 +27,7 @@ class Alunos extends Component
 
         $this->validate([
             'nome' => 'required|min:3',
-            'email' => 'required|email|unique:alunos,email',
+            'email' => 'required|email|unique:aluno,email',
             'telefone' => 'nullable|string',
             'nascimento' => 'nullable|date',
             'curso' => 'required|string',
