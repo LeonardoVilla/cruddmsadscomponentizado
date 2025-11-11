@@ -9,7 +9,9 @@ use App\Livewire\Sala;
 
 Route::get('/', Home::class)->name('home');
 
-Route::get('alunos', Alunos::class)->name('alunos');
+// Route::get('alunos', Alunos::class)->name('alunos');
+// Route::view('/alunos', 'alunos.index')->name('alunos.index');
+Route::view('/alunos', 'livewire.alunos')->name('alunos');
 
 Route::get('sala', Sala::class)->name('sala');
 

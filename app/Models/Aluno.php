@@ -14,5 +14,5 @@ class aluno extends Model
         'telefone',
         'nascimento',
         'curso'
-    ]
+    ];
 }

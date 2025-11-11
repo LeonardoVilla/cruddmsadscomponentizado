@@ -2,31 +2,39 @@
 
 namespace App\Livewire;
 
+use App\Models\Aluno;
 use Livewire\Component;
 
 class Alunos extends Component
 {
     public $nome;
-    public $email;
-    public $telefone;
-    public $nascimento;
-    public $curso;
 
+    public $email;
+
+    public $telefone;
+
+    public $nascimento;
+
+    public $curso;
 
     public function render()
     {
-        return view('livewire.alunos')->layout('layouts.app');
+        return view('livewire.alunos');
     }
-    
-    public function store(){
-    
-        $this->validate([
-            'nome' => 'required|min:3',
-            'email' => 'required|email|unique:alunos,email',
-            'telefone' => 'nullable|string',
-            'nascimento' => 'nullable|date',
-            'curso' => 'required|string',
-        ]);
+
+    protected $rules = [
+        'nome' => 'required|min:3',
+        'email' => 'required|email|unique:aluno,email',
+        'telefone' => 'required|string|unique:alunos,telefone',
+        'telefone' => 'nullable|string',
+        'nascimento' => 'nullable|date',
+        'curso' => 'required|string',
+    ];
+
+    public function store()
+    {
+
+        $this->validate();
 
         Aluno::create([
             'nome' => $this->nome,
@@ -40,14 +48,12 @@ class Alunos extends Component
 
         session()->flash('success', 'Aluno cadastrado com sucesso!');
 
-    }
-
-    public function update(){
-
-    }
-
-    public function delete(){
+        // Redireciona de volta para a mesma rota
+        return redirect(request()->header('Referer'));
 
     }
 
+    public function update() {}
+
+    public function delete() {}
 }
