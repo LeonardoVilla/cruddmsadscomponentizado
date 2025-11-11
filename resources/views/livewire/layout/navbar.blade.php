@@ -1,3 +1,20 @@
+<?php
+
+use App\Livewire\Actions\Logout;
+use Livewire\Volt\Component;
+
+new class extends Component
+{
+    /**
+     * Log the current user out of the application.
+     */
+    public function logout(Logout $logout): void
+    {
+        $logout();
+
+        $this->redirect('/login', navigate: true);
+    }
+}; ?>
 <!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
 <nav class="relative bg-gray-800">
@@ -28,6 +45,7 @@
             <a href="{{ route('register') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Cadastra-se</a>
             <a href="{{ route('profile') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Conta</a>
             <a href="{{ route('alunos') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Aluno</a>
+            <a wire:click="logout" href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Sair</a>
           </div>
         </div>
       </div>
