@@ -6,7 +6,7 @@ use Livewire\Volt\Component;
 new class extends Component
 {
     /**
-     * Log the current user out of the application.
+     * Faz logout do usuário atual.
      */
     public function logout(Logout $logout): void
     {
@@ -14,75 +14,64 @@ new class extends Component
 
         $this->redirect('/login', navigate: true);
     }
-}; ?>
-<!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
-<nav class="relative bg-gray-800">
-  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 items-center justify-between">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
-        <button type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-          <span class="absolute -inset-0.5"></span>
-          <span class="sr-only">Open main menu</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 in-aria-expanded:hidden">
-            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 not-in-aria-expanded:hidden">
-            <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-      </div>
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex shrink-0 items-center">
-          <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" class="h-8 w-auto" />
+};
+?>
+
+<!-- Navbar responsiva e interativa (Tailwind + Alpine.js) -->
+<header class="relative z-20 w-full border-b shadow-lg border-slate-200 bg-white/90 shadow-slate-700/5 lg:border-slate-200 lg:backdrop-blur-sm">
+  <div class="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
+
+    <!-- Alpine.js controlando dropdown e menu mobile -->
+    <nav x-data="{ openMenu: false, openUser: false }"
+         class="flex h-[5.5rem] items-stretch justify-between font-medium text-slate-700"
+         aria-label="main navigation">
+
+      <!-- Logo -->
+      <a href="{{ route('home') }}" class="flex items-center gap-2 py-3 text-lg whitespace-nowrap focus:outline-none lg:flex-1">
+        <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=emerald&shade=500" alt="Logo" class="w-10 h-10">
+        <span class="font-semibold text-emerald-600">Laravel Cloud</span>
+      </a>
+
+      <!-- Botão Mobile -->
+      <button @click="openMenu = !openMenu" class="relative self-center order-10 block w-10 h-10 lg:hidden" aria-label="Alternar menu">
+        <div class="absolute w-6 transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+          <span :class="{ 'rotate-45 translate-y-0.5': openMenu }" class="block h-0.5 w-6 bg-slate-900 transition-all duration-300"></span>
+          <span :class="{ 'opacity-0': openMenu }" class="block h-0.5 w-6 my-1 bg-slate-900 transition-all duration-300"></span>
+          <span :class="{ '-rotate-45 -translate-y-0.5': openMenu }" class="block h-0.5 w-6 bg-slate-900 transition-all duration-300"></span>
         </div>
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-            <a href="{{ route('home') }}" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Home</a>
-            <a href="{{ route('login') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Login</a>
-            <a href="{{ route('register') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Cadastra-se</a>
-            <a href="{{ route('profile') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Conta</a>
-            <a href="{{ route('alunos') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Aluno</a>
-            <a wire:click="logout" href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Sair</a>
-          </div>
-        </div>
-      </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <button type="button" class="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-          <span class="absolute -inset-1.5"></span>
-          <span class="sr-only">View notifications</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
-            <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
+      </button>
+
+      <!-- Links de Navegação -->
+      <ul 
+        :class="{ 'opacity-100 visible': openMenu, 'opacity-0 invisible': !openMenu }"
+        class="absolute top-0 left-0 z-[-1] flex flex-col items-center justify-center gap-4 h-screen w-full overflow-y-auto bg-white/90 text-center font-medium opacity-0 transition-all duration-300
+              lg:visible lg:relative lg:z-0 lg:flex lg:h-full lg:w-auto lg:flex-row lg:items-center lg:justify-start lg:bg-transparent lg:px-0 lg:pt-0 lg:opacity-100 lg:text-left">
+
+        <li><a href="{{ route('home') }}" class="block py-2 px-6 text-lg hover:text-emerald-600 transition">Home</a></li>
+        <li><a href="{{ route('login') }}" class="block py-2 px-6 text-lg hover:text-emerald-600 transition">Login</a></li>
+        <li><a href="{{ route('register') }}" class="block py-2 px-6 text-lg hover:text-emerald-600 transition">Cadastrar-se</a></li>
+        <li><a href="{{ route('profile') }}" class="block py-2 px-6 text-lg hover:text-emerald-600 transition">Conta</a></li>
+        <li><a href="{{ route('alunos') }}" class="block py-2 px-6 text-lg hover:text-emerald-600 transition">Aluno</a></li>
+      </ul>
+
+
+      <!-- Avatar + Dropdown -->
+      <div class="flex items-center px-6 ml-auto lg:ml-0 lg:p-0 relative">
+        <button @click="openUser = !openUser" class="relative inline-flex items-center justify-center w-10 h-10 text-white rounded-full focus:outline-none">
+          <img src="{{ asset('images/cabecaghibli.png') }}" alt="Usuário" class="max-w-full rounded-full">
+          <span class="absolute bottom-0 right-0 inline-flex items-center justify-center p-1 text-sm text-white bg-pink-500 border-2 border-white rounded-full"></span>
         </button>
 
-        <!-- Profile dropdown -->
-        <el-dropdown class="relative ml-3">
-          <button class="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-            <span class="absolute -inset-1.5"></span>
-            <span class="sr-only">Open user menu</span>
-            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10" />
-          </button>
-
-          <el-menu anchor="bottom end" popover class="w-48 origin-top-right rounded-md bg-white py-1 shadow-lg outline outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Your profile</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Settings</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Sign out</a>
-          </el-menu>
-        </el-dropdown>
+        <!-- Dropdown -->
+        <div x-show="openUser" @click.away="openUser = false"
+             x-transition
+             class="absolute right-0 top-14 w-48 bg-white shadow-md rounded-md overflow-hidden border border-gray-100">
+          <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Configurações</a>
+          <a wire:click="logout" href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sair</a>
+        </div>
       </div>
-    </div>
+
+    </nav>
   </div>
-
-  <el-disclosure id="mobile-menu" hidden class="block sm:hidden">
-    <div class="space-y-1 px-2 pt-2 pb-3">
-      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-      <a href="#" aria-current="page" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white">Dashboard</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Team</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Projects</a>
-      <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Calendar</a>
-    </div>
-  </el-disclosure>
-</nav>
+</header>
